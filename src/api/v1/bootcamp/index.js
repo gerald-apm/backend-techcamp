@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const mongo = require("mongojs");
-const db = mongo("mongodb://34.101.57.136:27017/csr?directConnection=true", [
+const db = mongo("mongodb://34.101.92.34:27017/csr?directConnection=true", [
   "todos",
 ]);
 
