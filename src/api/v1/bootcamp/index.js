@@ -5,6 +5,14 @@ const db = mongo("mongodb://34.101.92.34:27017/csr?directConnection=true", [
   "todos",
 ]);
 
+const baseResponse = (data, success = true) => {
+  return {
+    success,
+    timestamp: new Date(),
+    data,
+  };
+};
+
 router.get("/", (req, res, next) => {
   let query = {};
   if (req.query.text) query.text = req.query.text;
@@ -17,7 +25,7 @@ router.get("/", (req, res, next) => {
     if (err) {
       res.send(err);
     } else {
-      res.json(result);
+      res.json(baseResponse(result));
     }
   });
 });
@@ -34,7 +42,7 @@ router.post("/", (req, res, next) => {
       if (err) {
         res.send(err);
       } else {
-        res.json(result);
+        res.json(baseResponse(result));
       }
     });
   }
@@ -57,7 +65,7 @@ router.put("/:id", (req, res, next) => {
         if (err) {
           res.send(err);
         } else {
-          res.json(result);
+          res.json(baseResponse(result));
         }
       }
     );
@@ -72,7 +80,7 @@ router.get("/:id", (req, res, next) => {
       res.send(err);
       console.log(err);
     } else {
-      res.json(result);
+      res.json(baseResponse(result));
     }
   });
 });
@@ -84,7 +92,7 @@ router.delete("/:id", (req, res, next) => {
     if (err) {
       res.send(err);
     } else {
-      res.json(result);
+      res.json(baseResponse(result));
     }
   });
 });
